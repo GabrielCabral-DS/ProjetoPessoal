@@ -8,6 +8,7 @@ import br.com.gabrielcabralprojetopessoal.projetopessoal.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
+    // Buscar por username e email
 
     User findByUserName(String userName);
 
