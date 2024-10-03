@@ -40,10 +40,9 @@ public class UserService {
     }
 
     public List<UserDTO> listUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
+        return userRepository.findAll().stream()
                 .map(UserDTO::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public User updatUser(UUID id, UserDTO userDTO) {
@@ -58,6 +57,8 @@ public class UserService {
             user.setPassWord(userDTO.getPassword());
 
             return userRepository.save(user);
+        }else {
+           throw new EntityNotFoundException("Usuário não encontrado!");
         }
     }
 

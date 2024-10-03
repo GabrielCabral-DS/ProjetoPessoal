@@ -10,9 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.gabrielcabralprojetopessoal.projetopessoal.domain.User;
 import br.com.gabrielcabralprojetopessoal.projetopessoal.domain.UserDTO;
 import br.com.gabrielcabralprojetopessoal.projetopessoal.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +44,12 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> getUsers() {
         List<UserDTO> listUsers = userService.listUsers();
         return ResponseEntity.ok(listUsers);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable UUID id, @RequestBody @Valid UserDTO userDTO) {
+        User upUser = userService.updatUser(id, userDTO);
+        return ResponseEntity.ok(upUser);
     }
 
     @DeleteMapping("/{id}")
